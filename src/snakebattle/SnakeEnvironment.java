@@ -62,6 +62,7 @@ class SnakeEnvironment extends Environment {
         mySnake1.getBody().add(new Point(9, 6));
         mySnake1.setDirection(Direction.RIGHT);
         mySnake1.setColor(Color.GREEN);
+        mySnake1.setMoveDelay(10);
         mySnake1.setRandomDirectionChange(true);
         this.snakes.add(mySnake1);
 
@@ -71,14 +72,15 @@ class SnakeEnvironment extends Environment {
         mySnake2.getBody().add(new Point(9, 16));
         mySnake2.setDirection(Direction.UP);
         mySnake2.setColor(Color.MAGENTA);
+        mySnake2.setMoveDelay(3);
         mySnake2.setRandomDirectionChange(true);
         this.snakes.add(mySnake2);
 
-        this.setSnake(new Snake());
-        this.getSnake().getBody().add(new Point(5, 5));
-        this.getSnake().getBody().add(new Point(5, 4));
-        this.getSnake().getBody().add(new Point(5, 3));
-        this.getSnake().getBody().add(new Point(4, 3));
+        this.snake = new Snake();
+        this.snake.getBody().add(new Point(5, 5));
+        this.snake.getBody().add(new Point(5, 4));
+        this.snake.getBody().add(new Point(5, 3));
+        this.snake.getBody().add(new Point(4, 3));
 
 
     }
@@ -86,18 +88,18 @@ class SnakeEnvironment extends Environment {
     @Override
     public void timerTaskHandler() {
         if (snake != null) {
-            if (moveCounter <= 0) {
-                System.out.println("MOVE");
-                snake.move();
-
-                for (int i = 0; i < this.snakes.size(); i++) {
-                    this.snakes.get(i).move();
+            snake.move();
+            for (int i = 0; i < apples.size(); i++) {
+                if (snake.getHead().equals(apples.get(i))) {
+                    //add to score and move apple
+                    this.score += 50;
+                    this.apples.get(i).x = (int) (Math.random() * this.grid.getColumns());
+                    this.apples.get(i).y = (int) (Math.random() * this.grid.getRows());
                 }
-
-                moveCounter = delay;
-            } else {
-                moveCounter--;
             }
+        }
+        for (int i = 0; i < this.snakes.size(); i++) {
+            this.snakes.get(i).move();
         }
 
     }
