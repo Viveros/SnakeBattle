@@ -4,6 +4,7 @@
  */
 package snakebattle;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -11,82 +12,142 @@ import java.util.ArrayList;
  *
  * @author Wyatt
  */
-public class Snake {  
-   private ArrayList<Point> body;
-   private Direction direction;
-    private Direction setDirection;
-    private int delay;
-   {
+public class Snake {
+
+
+    {
         body = new ArrayList<>();
     }
-   
-   public void move() {
-       // create a new location for the head, using the direction
-       int x = 0;
-       int y = 0;
-       
-       switch (getDirection())  {
-           case UP:
-               x = 0;
-               y = -1;
-               break;
-               
-           case RIGHT:
-               x = 1;
-               y = 0;
-               break;
-               
-           case DOWN:
-               x = 0;
-               y = 1;
-               break;
-               
-           case LEFT:
-               x = -1;
-               y = 0;
-       }
-       body.add(0, new Point(getHead().x + x, getHead().y + y));
-       body.remove(body.size() - 1);     
-   }
-   
-   
 
-   public Point getHead(){
-       return body.get(0);
-   }
-   
+    public void move() {
+        
+         //randomly change direction
+        if ((isRandomDirectionChange()) && (Math.random() <= .20)) {
+            setDirection(Direction.getRandomDirection());
+        }
+        
+        // create a new location for the head, using the direction
+        int x = 0;
+        int y = 0;
+        
+        switch (getDirection()) {
+            case UP:
+                x = 0;
+                y = -1;
+                break;
+
+            case RIGHT:
+                x = 1;
+                y = 0;
+                break;
+
+            case DOWN:
+                x = 0;
+                y = 1;
+                break;
+
+            case LEFT:
+                x = -1;
+                y = 0;
+        }
+        body.add(0, new Point(getHead().x + x, getHead().y + y));
+        body.remove(body.size() - 1);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Properties">
+    private ArrayList<Point> body;
+    private Direction direction = Direction.RIGHT;
+    private Color color = Color.RED;
+    private boolean randomDirectionChange = false;
+    private int moveDelay = 5;
+    private int delay;
     
-   
+    public Point getHead() {
+        return body.get(0);
+    }
+    
     /**
      * @return the body
      */
     public ArrayList<Point> getBody() {
         return body;
     }
-
+    
     /**
      * @param body the body to set
      */
     public void setBody(ArrayList<Point> body) {
         this.body = body;
     }
-
+    
     /**
      * @return the direction
      */
     public Direction getDirection() {
         return direction;
     }
-
+    
     /**
      * @param direction the direction to set
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
+    //</editor-fold>
 
-    void setBody(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
     }
-    
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * @return the moveDelay
+     */
+    public int getMoveDelay() {
+        return moveDelay;
+    }
+
+    /**
+     * @param moveDelay the moveDelay to set
+     */
+    public void setMoveDelay(int moveDelay) {
+        this.moveDelay = moveDelay;
+    }
+
+    /**
+     * @return the delay
+     */
+    public int getDelay() {
+        return delay;
+    }
+
+    /**
+     * @param delay the delay to set
+     */
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    /**
+     * @return the randomDirectionChange
+     */
+    public boolean isRandomDirectionChange() {
+        return randomDirectionChange;
+    }
+
+    /**
+     * @param randomDirectionChange the randomDirectionChange to set
+     */
+    public void setRandomDirectionChange(boolean randomDirectionChange) {
+        this.randomDirectionChange = randomDirectionChange;
+    }
 }

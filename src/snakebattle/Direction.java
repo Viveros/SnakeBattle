@@ -9,5 +9,9 @@ package snakebattle;
  * @author Wyatt
  */
 public enum Direction {
-            RIGHT, LEFT, UP, DOWN
+            RIGHT, LEFT, UP, DOWN;
+
+    public static Direction getRandomDirection() {
+        return Direction.values()[(int) (Math.random() * Direction.values().length)];
+    }
 }
