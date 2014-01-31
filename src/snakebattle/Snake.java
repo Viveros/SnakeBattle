@@ -20,17 +20,35 @@ public class Snake {
 
     public void move() {
         if (delay <= 0) {
-            delay = moveDelay;
 
             //randomly change direction
             if ((isRandomDirectionChange()) && (Math.random() <= .20)) {
                 setDirection(Direction.getRandomDirection());
             }
 
+
+
+
             // create a new location for the head, using the direction
             int x = 0;
             int y = 0;
 
+            
+            if (getHead().x + x >= maxX) {
+                this.setDirection(Direction.LEFT);
+            }
+            if (getHead().y + y >= maxY) {
+                this.setDirection(Direction.UP);
+            }
+            if (getHead().x == minX) {
+                this.setDirection(Direction.RIGHT);
+            }
+            if (getHead().y == minY) {
+                this.setDirection(Direction.DOWN);
+            }
+            
+            
+            
             switch (getDirection()) {
                 case UP:
                     x = 0;
@@ -50,20 +68,65 @@ public class Snake {
                 case LEFT:
                     x = -1;
                     y = 0;
+                    
             }
+            
+
+
             body.add(0, new Point(getHead().x + x, getHead().y + y));
             body.remove(body.size() - 1);
         } else {
             delay--;
         }
+
     }
+
+    public void grow() {
+        body.add(0, new Point(getHead().x, getHead().y));
+    }
+
+    public void shrink() {
+        body.remove(body.size() - 1);
+    }
+    public void kill()  {
+        body.remove(body.size() - body.size());
+    }
+    
+    
+    
+    
+//    public boolean intersects(Point location, ArrayList<Point> locations) {
+//        for (int i = 0; i < getBody().size(); i++) {
+//            if (getHead().equals(getBody().get(i))) {
+//                this.shrink();
+//                System.out.println("Hit the snake!!!");
+//            }
+//        }
+//        return false;
+//    }
+    
+    public static boolean intersects(Point location, ArrayList<Point> locations) {
+        for (int i = 0; i < locations.size(); i++) {
+            if (location.equals(locations.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Properties">
     private ArrayList<Point> body;
     private Direction direction = Direction.RIGHT;
     private Color color = Color.RED;
     private boolean randomDirectionChange = false;
-    private int moveDelay = 5;
     private int delay;
+    private int maxX = 94;
+    private int maxY = 46;
+    private int minX = 0;
+    private int minY = 0;
 
     public Point getHead() {
         return body.get(0);
@@ -114,17 +177,6 @@ public class Snake {
     /**
      * @return the moveDelay
      */
-    public int getMoveDelay() {
-        return moveDelay;
-    }
-
-    /**
-     * @param moveDelay the moveDelay to set
-     */
-    public void setMoveDelay(int moveDelay) {
-        this.moveDelay = moveDelay;
-    }
-
     /**
      * @return the randomDirectionChange
      */

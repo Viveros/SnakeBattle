@@ -22,7 +22,7 @@ public class SnakeBattle {
     }
 
     private static void start() {
-        ApplicationStarter.run("Snake Battle!!", new SnakeEnvironment());
+        ApplicationStarter.run("Snake Battle", new SnakeEnvironment());
         AudioPlayer.play(ResourceTools.getResourceAsStream("resources/Casino_Royale.wav"));
     }
 }
