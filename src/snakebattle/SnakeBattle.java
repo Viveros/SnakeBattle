@@ -19,10 +19,10 @@ public class SnakeBattle {
      */
     public static void main(String[] args) {
         start();
+        
     }
 
     private static void start() {
         ApplicationStarter.run("Snake Battle", new SnakeEnvironment());
-        AudioPlayer.play(ResourceTools.getResourceAsStream("resources/Casino_Royale.wav"));
     }
 }

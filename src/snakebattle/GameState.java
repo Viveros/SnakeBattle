@@ -9,5 +9,5 @@ package snakebattle;
  * @author Wyatt
  */
 public enum GameState {
-        RUNNING, PAUSED, ENDED
+        RUNNING, PAUSED, ENDED, QUIT, START, EATAPPLE, BACKGROUNDMUSIC, CRASH, KILLED, GAMEOVER, HITBOMB
 }

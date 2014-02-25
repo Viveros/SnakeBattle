@@ -324,13 +324,13 @@ public class GraphicsPalette {
        
         
         // draw apple body
-        graphics.setColor(Color.GREEN);
+        graphics.setColor(Color.WHITE);
         graphics.fillOval(position.x + (size.x / 5), position.y + (size.y / 5), size.x - (size.x / 4), size.y - (size.x / 4));
 
-        // draw stem
-        graphics.setColor(Color.BLACK);
-        graphics.drawArc(position.x, position.y + (size.y / 6), (size.x / 2), (size.y / 2), 0, 80);
-        
+//        // draw stem
+//        graphics.setColor(Color.BLACK);
+//        graphics.drawArc(position.x, position.y + (size.y / 6), (size.x / 2), (size.y / 2), 0, 80);
+//        
         
     }
 
