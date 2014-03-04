@@ -28,9 +28,6 @@ public class Snake {
                 setDirection(Direction.getRandomDirection());
             }
 
-
-
-
             // create a new location for the head, using the direction
             int x = 0;
             int y = 0;
@@ -84,11 +81,19 @@ public class Snake {
         body.add(0, new Point(getHead().x, getHead().y));
     }
 
-    public void shrink() {
-        body.remove(body.size() - 1);
-    }
-    public void kill()  {
+//    public void shrink() {
+//        body.remove(body.size() - 1);
+//    }
+    public void shrink()  {
         body.remove(0);
+    }
+    
+    public void kill(){
+        this.alive = false;
+    }
+
+    public void resucitate(){
+        this.alive = true;
     }
     
     public void respawn(Point respawnLocation, Point hiddenLocation){
@@ -107,8 +112,6 @@ public class Snake {
         }
         return false;
     }
-    
-
     
     
     //<editor-fold defaultstate="collapsed" desc="Properties">
